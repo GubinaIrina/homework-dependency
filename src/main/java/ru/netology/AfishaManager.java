@@ -1,7 +1,13 @@
 package ru.netology;
 
+import lombok.Data;
+
+@Data
+
 public class AfishaManager {
     private PurchaseItem[] items = new PurchaseItem[0];
+    private int lenght = 10;
+
     public void add(PurchaseItem item){
 
         int lenght = items.length + 1;
@@ -14,10 +20,10 @@ public class AfishaManager {
         items = tmp;
     }
 
-    public PurchaseItem[] getAll(){
-        PurchaseItem[] result = new PurchaseItem[items.length];
+    public PurchaseItem[] getAll(int lenght){
+        PurchaseItem[] result = new PurchaseItem[getLenght()];
         for (int i = 0; i < result.length; i++) {
-            int index = items.length - 1 - i;
+            int index = getLenght() - 1 - i;
             result[i] = items[index];
         }
          return result;
