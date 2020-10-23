@@ -28,4 +28,28 @@ class AfishaManagerTest {
 
     }
 
+
+    @Test
+    void getAll() {
+        PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
+        PurchaseItem second = new PurchaseItem(2, 2, "Вперед");
+        PurchaseItem third = new PurchaseItem(3, 3, "Отель 'Белград'");
+        PurchaseItem four = new PurchaseItem(4, 4, "Джентельмены");
+        PurchaseItem five = new PurchaseItem(5, 5, "Человек-невидимка");
+        PurchaseItem six = new PurchaseItem(6, 6, "Тролли.Мировой тур");
+        PurchaseItem seven = new PurchaseItem(7, 7, "Номер один");
+
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(four);
+        manager.add(five);
+        manager.add(six);
+        manager.add(seven);
+
+        manager.setLenght(7);
+        PurchaseItem[] expected = new PurchaseItem[]{seven, six, five, four, third, second, first};
+        PurchaseItem[] actual = manager.getAll(manager.getLenght());
+        assertArrayEquals(expected, actual);
+    }
 }
