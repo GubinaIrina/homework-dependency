@@ -21,8 +21,11 @@ public class AfishaManager {
     }
 
     public PurchaseItem[] getAll(int lenght) {
-        PurchaseItem[] result = new PurchaseItem[getLenght()];
-        for (int i = 0; i < result.length; i++) {
+        PurchaseItem[] result = new PurchaseItem[items.length];
+        if (result.length < getLenght()) {
+            this.lenght = result.length;
+        }
+        for (int i = 0; i < this.lenght; i++) {
             int index = getLenght() - 1 - i;
             result[i] = items[index];
         }

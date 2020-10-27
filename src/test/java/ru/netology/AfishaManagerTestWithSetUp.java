@@ -29,7 +29,6 @@ class AfishaManagerTestWithSetUp {
 
     @Test
     void getAll() {
-        manager.setLenght(7);
         PurchaseItem[] expected = new PurchaseItem[]{seven, six, five, four, third, second, first};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
@@ -47,7 +46,7 @@ class AfishaManagerTestWithSetUp {
         manager.add(ten);
         manager.add(eleven);
 
-        PurchaseItem[] expected = new PurchaseItem[]{eleven, ten, nine, eight, seven, six, five, four, third, second, first};
+        PurchaseItem[] expected = new PurchaseItem[]{eleven, ten, nine, eight, seven, six, five, four, third, second};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
     }

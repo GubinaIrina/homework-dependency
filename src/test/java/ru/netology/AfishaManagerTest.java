@@ -9,7 +9,6 @@ class AfishaManagerTest {
 
     @Test
     void getAllOneItem() {
-        manager.setLenght(1);
         PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
         manager.add(first);
 
@@ -21,7 +20,6 @@ class AfishaManagerTest {
 
     @Test
     void getAllEmptyManager() {
-        manager.setLenght(0);
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         PurchaseItem[] expected = new PurchaseItem[0];
         assertArrayEquals(expected, actual);
@@ -47,8 +45,22 @@ class AfishaManagerTest {
         manager.add(six);
         manager.add(seven);
 
-        manager.setLenght(7);
         PurchaseItem[] expected = new PurchaseItem[]{seven, six, five, four, third, second, first};
+        PurchaseItem[] actual = manager.getAll(manager.getLenght());
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void getAll1() {
+        PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
+        PurchaseItem second = new PurchaseItem(2, 2, "Вперед");
+        PurchaseItem third = new PurchaseItem(3, 3, "Отель 'Белград'");
+
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+
+        PurchaseItem[] expected = new PurchaseItem[]{third, second, first};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
     }
