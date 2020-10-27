@@ -49,19 +49,4 @@ class AfishaManagerTest {
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
     }
-
-    @Test
-    void getAll1() {
-        PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
-        PurchaseItem second = new PurchaseItem(2, 2, "Вперед");
-        PurchaseItem third = new PurchaseItem(3, 3, "Отель 'Белград'");
-
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-
-        PurchaseItem[] expected = new PurchaseItem[]{third, second, first};
-        PurchaseItem[] actual = manager.getAll(manager.getLenght());
-        assertArrayEquals(expected, actual);
-    }
 }
