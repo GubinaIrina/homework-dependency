@@ -1,12 +1,22 @@
-package ru.netology;
+package ru.netology.domain;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import ru.netology.repository.AfishaRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.mockito.Mockito.doReturn;
 
+@ExtendWith(MockitoExtension.class)
 class AfishaManagerTestWithSetUp {
-    private AfishaManager manager = new AfishaManager();
+    @Mock
+    private AfishaRepository repository;
+    @InjectMocks
+    private AfishaManager manager;
     private PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
     private PurchaseItem second = new PurchaseItem(2, 2, "Вперед");
     private PurchaseItem third = new PurchaseItem(3, 3, "Отель 'Белград'");
@@ -29,6 +39,9 @@ class AfishaManagerTestWithSetUp {
 
     @Test
     void getAll() {
+        PurchaseItem[] returned = new PurchaseItem[]{first, second, third, four, five, six, seven};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] expected = new PurchaseItem[]{seven, six, five, four, third, second, first};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
@@ -46,9 +59,11 @@ class AfishaManagerTestWithSetUp {
         manager.add(ten);
         manager.add(eleven);
 
+        PurchaseItem[] returned = new PurchaseItem[]{first, second, third, four, five, six, seven, eight, nine, ten, eleven};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] expected = new PurchaseItem[]{eleven, ten, nine, eight, seven, six, five, four, third, second};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         assertArrayEquals(expected, actual);
     }
-
 }

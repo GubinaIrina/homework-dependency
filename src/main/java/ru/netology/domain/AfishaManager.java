@@ -1,26 +1,24 @@
-package ru.netology;
+package ru.netology.domain;
 
 import lombok.Data;
+import ru.netology.repository.AfishaRepository;
 
 @Data
 
 public class AfishaManager {
-    private PurchaseItem[] items = new PurchaseItem[0];
+    private AfishaRepository repository;
     private int lenght = 10;
 
-    public void add(PurchaseItem item) {
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
+    }
 
-        int lenght = items.length + 1;
-        PurchaseItem[] tmp = new PurchaseItem[lenght];
-        for (int i = 0; i < items.length; i++) {
-            tmp[i] = items[i];
-        }
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+    public void add(PurchaseItem item) {
+        repository.save(item);
     }
 
     public PurchaseItem[] getAll(int lenght) {
+        PurchaseItem[] items = repository.findAll();
         PurchaseItem[] result = new PurchaseItem[items.length];
         if (result.length < getLenght()) {
             this.lenght = result.length;
@@ -31,5 +29,4 @@ public class AfishaManager {
         }
         return result;
     }
-
 }

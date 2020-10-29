@@ -1,29 +1,45 @@
-package ru.netology;
+package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import ru.netology.repository.AfishaRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.mockito.Mockito.doReturn;
 
+@ExtendWith(MockitoExtension.class)
 class AfishaManagerTest {
-    AfishaManager manager = new AfishaManager();
+    @Mock
+    private AfishaRepository repository;
+    @InjectMocks
+    private AfishaManager manager;
 
     @Test
     void getAllOneItem() {
         PurchaseItem first = new PurchaseItem(1, 1, "Бладшот");
         manager.add(first);
 
-        PurchaseItem[] actual = manager.getAll(manager.getLenght());
+        PurchaseItem[] returned = new PurchaseItem[]{first};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] expected = new PurchaseItem[]{first};
+        PurchaseItem[] actual = manager.getAll(manager.getLenght());
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void getAllEmptyManager() {
+        PurchaseItem[] returned = new PurchaseItem[0];
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
         PurchaseItem[] expected = new PurchaseItem[0];
-        assertArrayEquals(expected, actual);
 
+        assertArrayEquals(expected, actual);
     }
 
 
@@ -45,8 +61,12 @@ class AfishaManagerTest {
         manager.add(six);
         manager.add(seven);
 
+        PurchaseItem[] returned = new PurchaseItem[]{first, second, third, four, five, six, seven};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] expected = new PurchaseItem[]{seven, six, five, four, third, second, first};
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
+
         assertArrayEquals(expected, actual);
     }
 }
