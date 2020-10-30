@@ -9,6 +9,7 @@ import ru.netology.repository.AfishaRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class AfishaManagerTest {
@@ -29,6 +30,7 @@ class AfishaManagerTest {
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
 
         assertArrayEquals(expected, actual);
+        verify(repository).findAll();
     }
 
     @Test
@@ -40,6 +42,7 @@ class AfishaManagerTest {
         PurchaseItem[] expected = new PurchaseItem[0];
 
         assertArrayEquals(expected, actual);
+        verify(repository).findAll();
     }
 
 
@@ -68,5 +71,6 @@ class AfishaManagerTest {
         PurchaseItem[] actual = manager.getAll(manager.getLenght());
 
         assertArrayEquals(expected, actual);
+        verify(repository).findAll();
     }
 }
