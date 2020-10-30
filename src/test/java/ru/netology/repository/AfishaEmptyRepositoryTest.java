@@ -15,24 +15,4 @@ class AfishaEmptyRepositoryTest {
 
         assertArrayEquals(expected, actual);
     }
-
-    @Test
-    void removeById() {
-        int idToRemove = 2;
-
-        PurchaseItem[] expected = new PurchaseItem[0];
-        PurchaseItem[] actual = repository.removeById(idToRemove);
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void findById() {
-        int id = 1;
-
-        PurchaseItem expected = new PurchaseItem(1, 1, "Бладшот");
-        PurchaseItem actual = repository.findById(id);
-
-        assertEquals(expected, actual);
-    }
 }
